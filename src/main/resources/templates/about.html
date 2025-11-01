@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">
+<head>
+    <title>About Us - BOOKSAW</title>
+</head>
+<body>
+    <section layout:fragment="content" class="container py-5 mt-5" id="about-us-content">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold">About BOOKSAW</h1>
+                <p class="lead text-muted">Câu chuyện đằng sau hiệu sách của chúng tôi.</p>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <h2>Chúng tôi là ai</h2>
+                <p>BOOKSAW không chỉ là một hiệu sách. Chúng tôi là một cộng đồng gồm những người yêu sách, những nhà tư tưởng và những người tìm kiếm tri thức. Sứ mệnh của chúng tôi là cung cấp một bộ sưu tập sách đa dạng, truyền cảm hứng đọc và tạo ra một không gian chào đón tất cả mọi người.</p>
+                <p>Được thành lập vào năm 2025, chúng tôi tin rằng mỗi cuốn sách đều có sức mạnh thay đổi một cuộc đời. (Bạn hãy thay thế bằng câu chuyện thật của mình...)</p>
+            </div>
+            <div class="col-md-6">
+                <img th:src="@{/images/about-store.jpg}" class="img-fluid rounded shadow-sm" alt="Nội thất cửa hàng BOOKSAW"
+                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/eeeeee/aaaaaa?text=BOOKSAW+Store';">
+            </div>
+        </div>
+
+        <div class="row text-center bg-light p-5 rounded mb-5">
+            <div class="col-12">
+                <h2 class="fw-light">Tầm nhìn của chúng tôi</h2>
+                <p class="lead">Trở thành nguồn tài nguyên đáng tin cậy nhất cho tri thức và văn hóa đọc, kết nối độc giả với những câu chuyện làm phong phú thêm cuộc sống của họ.</p>
+            </div>
+        </div>
+
+        <div class="row text-center mb-5">
+            <div class="col-12 mb-4">
+                <h2>Giá trị của chúng tôi</h2>
+            </div>
+
+            <div class="col-md-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-book-half text-primary mb-3" viewBox="0 0 16 16">
+                    <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388 1.17.953.71 1.48 1.734 1.48 3.146 0 3.177-2.543 4.144-5.01 4.144-1.2 0-1.933-.282-2.787-.803a6.7 6.7 0 0 1-.722-.61c-.26.283-.52.553-.798.798A.99.99 0 0 0 7 13.5c.346 0 .654-.194.815-.49a1 1 0 0 0 .11-.64c.066-.33.097-.66.097-1a.5.5 0 0 0-.5-.5h-2.5a.5.5 0 0 0-.5.5c0 .34.03.67.097 1 .03.17.06.33.11.49.16.296.47.49.815.49.309 0 .59-.14.778-.387a7 7 0 0 0 .722-.61c.23.18.47.35.7.5.34.22.73.38 1.15.48.88.2 1.95.24 3.09.12.9-.1 1.7-.3 2.3-.6.6-.3 1.1-.7 1.4-1.2.3-.5.5-1.1.5-1.7 0-1.2-.5-2.2-1.2-2.8-.7-.6-1.5-1-2.3-1.3-.8-.2-1.6-.3-2.4-.3-1.4 0-2.5.3-3.4.9-.9.6-1.5 1.5-1.5 2.6 0 .5.1.9.3 1.3.1.2.3.4.5.5.2.1.4.2.6.2.2 0 .4-.1.6-.2.2-.1.4-.3.5-.5.1-.2.3-.4.3-.6 0-.6-.3-1.1-.7-1.4-.4-.3-1-.5-1.6-.5-.6 0-1.1.1-1.6.3-.5.2-1 .5-1.3.8-.4.3-.7.7-.9 1.1-.2.4-.3.9-.3 1.4s.1.9.3 1.4c.2.4.4.7.7.9.3.2.7.4 1.1.5.4.1.8.2 1.2.2.5 0 1-.1 1.4-.2.4-.1.8-.3 1.2-.5.3-.2.6-.4.9-.7.2-.2.4-.4.6-.6.3-.3.6-.5.9-.7.3-.2.7-.4 1.1-.5.4-.1.8-.2 1.2-.2h.h.1l.1.1c.1 0 .1.1.1.1l.1.1.1.1.1.1.1.1c.3.3.6.6.8 1 .2.4.3.8.3 1.3 0 .7-.2 1.4-.5 2-.3.6-.8 1.1-1.3 1.5-.5.4-1.2.7-1.9.9-.7.2-1.5.3-2.3.3-1.1 0-2.1-.2-3.1-.5-.9-.3-1.8-.8-2.5-1.4-.7-.6-1.2-1.4-1.5-2.3-.3-.9-.4-1.8-.4-2.8 0-1.5.5-2.9 1.4-4 .9-1.1 2.1-1.9 3.5-2.3zM1 2.828c.885-.37 2.154-.769 3.388-.893 1.234-.124 2.503.11 3.388.752v9.746c-.935-.53-2.12-.702-3.388-.702-1.234 0-2.503.158-3.388.635z"/>
+                </svg>
+                <h4 class="fw-normal">Dịch vụ tận tâm</h4>
+                <p>(Dựa trên 'service terms') Chúng tôi cam kết mang đến trải nghiệm mua sắm tuyệt vời, từ việc tư vấn chọn sách đến chính sách đổi trả rõ ràng, minh bạch.</p>
+            </div>
+
+            <div class="col-md-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-people-fill text-primary mb-3" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                </svg>
+                <h4 class="fw-normal">Gắn kết cộng đồng</h4>
+                <p>(Dựa trên 'donate') Chúng tôi tin vào việc cho đi. Một phần lợi nhuận được quyên góp cho các quỹ khuyến học và các tổ chức phi lợi nhuận hỗ trợ văn hóa đọc.</p>
+            </div>
+
+            <div class="col-md-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-briefcase-fill text-primary mb-3" viewBox="0 0 16 16">
+                    <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5"/>
+                    <path d="M0 7.5Cb.79 7.852 1.93 8.32 3.29 8.718.73.2 1.57.3 2.45.3h4.52c.88 0 1.72-.1 2.45-.3C14.07 8.32 15.21 7.852 16 7.5V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5z"/>
+                </svg>
+                <h4 class="fw-normal">Cơ hội nghề nghiệp</h4>
+                <p>(Dựa trên 'careers') Chúng tôi luôn tìm kiếm những cá nhân tài năng, đam mê để tham gia vào đội ngũ. Chúng tôi cung cấp một môi trường làm việc năng động và sáng tạo.</p>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>
+

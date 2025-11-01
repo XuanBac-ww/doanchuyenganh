@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">
+<head>
+    <title>Our Store - BOOKSAW</title>
+</head>
+<body>
+    <section layout:fragment="content" class="container py-5 mt-5" id="store-content">
+
+        <div class="row mb-5">
+            <div class="col text-center">
+                <h1 class="display-4 fw-bold">Our Store</h1>
+                <p class="lead text-muted">Find your next great read.</p>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+
+            <div class="col-lg-4">
+
+                <!-- Search -->
+                <div class="card mb-4 border-0 shadow-sm rounded-3">
+                    <div class="card-header bg-white"><strong>Search</strong></div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for...">
+                            <button class="btn btn-dark" id="button-search" type="button">Go!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="card mb-4 border-0 shadow-sm rounded-3">
+                    <div class="card-header bg-white"><strong>Categories</strong></div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <a href="#" class="text-decoration-none text-dark">Fiction</a>
+                                <span class="badge bg-dark rounded-pill">50</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <a href="#" class="text-decoration-none text-dark">Non-Fiction</a>
+                                <span class="badge bg-dark rounded-pill">28</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <a href="#" class="text-decoration-none text-dark">Science Fiction</a>
+                                <span class="badge bg-dark rounded-pill">15</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <a href="#" class="text-decoration-none text-dark">Biography</a>
+                                <span class="badge bg-dark rounded-pill">22</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <a href="#" class="text-decoration-none text-dark">History</a>
+                                <span class="badge bg-dark rounded-pill">10</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danh sách sản phẩm -->
+            <div class="col-lg-8">
+
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <img src="https://placehold.co/300x450/EAE0D5/6B4F4F?text=Book+Cover" class="card-img-top" alt="Book Cover">
+                            <div class="card-body text-center">
+                                <h5 class="card-title fs-6 fw-bold">Sample Book Title 1</h5>
+                                <p class="card-text fw-bold text-dark mb-2">$19.99</p>
+                                <a href="#" class="btn btn-dark btn-sm">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <img src="https://placehold.co/300x450/EAE0D5/6B4F4F?text=Book+Cover" class="card-img-top" alt="Book Cover">
+                            <div class="card-body text-center">
+                                <h5 class="card-title fs-6 fw-bold">Sample Book Title 2</h5>
+                                <p class="card-text fw-bold text-dark mb-2">$24.50</p>
+                                <a href="#" class="btn btn-dark btn-sm">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <img src="https://placehold.co/300x450/EAE0D5/6B4F4F?text=Book+Cover" class="card-img-top" alt="Book Cover">
+                            <div class="card-body text-center">
+                                <h5 class="card-title fs-6 fw-bold">Sample Book Title 3</h5>
+                                <p class="card-text fw-bold text-dark mb-2">$15.00</p>
+                                <a href="#" class="btn btn-dark btn-sm">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <img src="https://placehold.co/300x450/EAE0D5/6B4F4F?text=Book+Cover" class="card-img-top" alt="Book Cover">
+                            <div class="card-body text-center">
+                                <h5 class="card-title fs-6 fw-bold">Sample Book Title 4</h5>
+                                <p class="card-text fw-bold text-dark mb-2">$22.99</p>
+                                <a href="#" class="btn btn-dark btn-sm">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <nav aria-label="Page navigation" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+
+    </section>
+</body>
+</html>
+
