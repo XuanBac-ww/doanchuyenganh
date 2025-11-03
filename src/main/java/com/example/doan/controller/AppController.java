@@ -13,26 +13,32 @@ public class AppController {
 
     @GetMapping("/about")
     public String showAboutPage() {
-        return "/about";
+        return "home/about";
     }
 
     @GetMapping("/blog")
     public String showBlogPage() {
-        return "/blog";
+        return "home/blog";
     }
 
     @GetMapping("/our-store")
     public String showProductPage() {
-        return "/our-store";
+        return "home/our-store";
     }
 
     @GetMapping("/contact")
     public String showContactPage() {
-        return "/contact";
+        return "home/contact";
     }
 
     @GetMapping("/thankyou")
     public String showThankyouPage() {
-        return "/thankyou";
+        return "home/thankyou";
+    }
+
+
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "admin";
     }
 }
