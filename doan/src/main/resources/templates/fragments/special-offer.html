@@ -1,8 +1,11 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <section  layout:fragment="special-offer" id="special-offer" class="bookshelf pb-5 mb-5">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">  <head>
+    <title>Special Offer</title> </head>
+
+<body>
+     <section  layout:fragment="content" id="special-offer" class="bookshelf pb-5 mb-5">
 
         <div class="section-header align-center">
             <div class="title">
@@ -95,5 +98,5 @@
         </div>
     </section>
 
-
+</body>
 </html>

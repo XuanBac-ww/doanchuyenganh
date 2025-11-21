@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Management</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <style>
+        .page-container {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .page-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 0 4px;
+        }
+        .btn:hover {
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Nút Xem chi tiết */
+        .btn-view {
+            background-color: #007bff; /* Xanh dương */
+        }
+        /* Nút Hủy đơn */
+        .btn-cancel {
+            background-color: #dc3545; /* Đỏ */
+        }
+
+        /* Kiểu bảng dữ liệu */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .data-table th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .data-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .data-table td:last-child {
+            text-align: center;
+        }
+
+        /* CSS cho các nhãn trạng thái */
+        .status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            white-space: nowrap;
+        }
+
+        /* Trạng thái thanh toán */
+        .status-paid { background-color: #28a745; } /* Đã thanh toán */
+        .status-unpaid { background-color: #dc3545; } /* Chưa thanh toán */
+
+        /* Trạng thái vận chuyển */
+        .status-pending { background-color: #ffc107; color: #333; } /* Chờ xử lý */
+        .status-shipped { background-color: #17a2b8; } /* Đang giao */
+        .status-delivered { background-color: #28a745; } /* Đã giao */
+        .status-cancelled { background-color: #6c757d; } /* Đã hủy */
+
+    </style>
+    <div class="page-container">
+
+        <div class="page-header">
+            <h2>Quản lý Đơn hàng</h2>
+        </div>
+
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>Mã ĐH</th>
+                <th>Tên Khách hàng</th>
+                <th>Ngày đặt</th>
+                <th>Tổng tiền</th>
+                <th>TT Thanh toán</th>
+                <th>TT Vận chuyển</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>#12345</td>
+                <td>Nguyễn Văn A</td>
+                <td>09/11/2025</td>
+                <td>37,938,000đ</td>
+                <td><span class="status status-paid">Đã thanh toán</span></td>
+                <td><span class="status status-pending">Chờ xử lý</span></td>
+                <td>
+                    <a href="#" class="btn btn-view">Xem</a>
+                    <a href="#" class="btn btn-cancel">Hủy</a>
+                </td>
+            </tr>
+            <tr>
+                <td>#12346</td>
+                <td>Trần Thị B</td>
+                <td>08/11/2025</td>
+                <td>1,580,000đ</td>
+                <td><span class="status status-unpaid">Chưa thanh toán (COD)</span></td>
+                <td><span class="status status-shipped">Đang giao</span></td>
+                <td>
+                    <a href="#" class="btn btn-view">Xem</a>
+                    <a href="#" class="btn btn-cancel">Hủy</a>
+                </td>
+            </tr>
+            <tr>
+                <td>#12347</td>
+                <td>Lê Văn C</td>
+                <td>07/11/2025</td>
+                <td>790,000đ</td>
+                <td><span class="status status-paid">Đã thanh toán</span></td>
+                <td><span class="status status-delivered">Đã giao</span></td>
+                <td>
+                    <a href="#" class="btn btn-view">Xem</a>
+                </td>
+            </tr>
+            <tr>
+                <td>#12348</td>
+                <td>Phạm Thị D</td>
+                <td>06/11/2025</td>
+                <td>3,200,000đ</td>
+                <td><span class="status status-unpaid">Chưa thanh toán</span></td>
+                <td><span class="status status-cancelled">Đã hủy</span></td>
+                <td>
+                    <a href="#" class="btn btn-view">Xem</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <section layout:fragment="latest-blog" id="latest-blog" class="py-5 my-5">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">  <head>
+    <title>Article</title> </head>
+
+<body>
+
+    <section layout:fragment="content" id="latest-blog" class="py-5 my-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -131,4 +136,5 @@
             </div>
         </div>
     </section>
+</body>
 </html>

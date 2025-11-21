@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <section layout:fragment="download-app" id="download-app" class="leaf-pattern-overlay">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">  <head>
+    <title>Download App</title> </head>
+
+<body>
+
+    <section layout:fragment="content" id="download-app" class="leaf-pattern-overlay">
         <div class="corner-pattern-overlay"></div>
         <div class="container">
             <div class="row justify-content-center">
@@ -32,4 +37,5 @@
             </div>
         </div>
     </section>
+</body>
 </html>

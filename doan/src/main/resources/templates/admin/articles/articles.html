@@ -4,20 +4,18 @@
       layout:decorate="~{/admin/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Category</title>
+    <title>Post Management</title>
 </head>
 <body>
 
 <div layout:fragment="content">
 
     <style>
-        /* Container chung của trang */
         .page-container {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
 
-        /* Tiêu đề trang và nút Thêm mới */
         .page-header {
             display: flex;
             justify-content: space-between;
@@ -32,7 +30,6 @@
             color: #333;
         }
 
-        /* Kiểu nút chung */
         .btn {
             padding: 8px 15px;
             border: none;
@@ -52,19 +49,19 @@
 
         /* Các nút cụ thể */
         .btn-add {
-            background-color: #28a745; /* Màu xanh lá */
+            background-color: #28a745; /* Xanh lá */
         }
         .btn-edit {
-            background-color: #007bff; /* Màu xanh dương */
+            background-color: #007bff; /* Xanh dương */
         }
         .btn-delete {
-            background-color: #dc3545; /* Màu đỏ */
+            background-color: #dc3545; /* Đỏ */
         }
 
         /* Kiểu bảng dữ liệu */
         .data-table {
             width: 100%;
-            border-collapse: collapse; /* Gộp viền */
+            border-collapse: collapse;
             margin-top: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -73,78 +70,102 @@
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
+            vertical-align: middle;
         }
 
-        /* Tiêu đề bảng */
         .data-table th {
             background-color: #f4f4f4;
             color: #333;
             font-weight: bold;
         }
 
-        /* Các hàng xen kẽ */
         .data-table tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-
-        /* Hiệu ứng khi di chuột qua hàng */
         .data-table tr:hover {
             background-color: #f1f1f1;
         }
 
-        /* Căn giữa cột hành động */
         .data-table td:last-child {
             text-align: center;
         }
+
+        /* CSS cho các nhãn trạng thái bài viết */
+        .status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            white-space: nowrap;
+        }
+        .status-published { background-color: #28a745; } /* Đã xuất bản */
+        .status-draft { background-color: #ffc107; color: #333; } /* Bản nháp */
+
     </style>
     <div class="page-container">
 
         <div class="page-header">
-            <h2>Quản lý Danh mục</h2>
-<!--            <a href="#" class="btn btn-add">Thêm mới Danh mục</a>-->
+            <h2>Quản lý Bài viết</h2>
+<!--            <a href="#" class="btn btn-add">Viết bài mới</a>-->
         </div>
 
         <table class="data-table">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Tên Danh mục</th>
-                <th>Mô tả</th>
+                <th>Tiêu đề</th>
+                <th>Tác giả</th>
+                <th>Chuyên mục</th>
+                <th>Ngày đăng</th>
+                <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>1</td>
-                <td>Điện tử</td>
-                <td>Các thiết bị điện tử, điện thoại, máy tính.</td>
+                <td>201</td>
+                <td>10 xu hướng công nghệ hàng đầu năm 2026</td>
+                <td>Admin</td>
+                <td>Công nghệ</td>
+                <td>05/11/2025</td>
+                <td><span class="status status-published">Đã xuất bản</span></td>
                 <td>
                     <a href="#" class="btn btn-edit">Sửa</a>
                     <a href="#" class="btn btn-delete">Xóa</a>
                 </td>
             </tr>
             <tr>
-                <td>2</td>
-                <td>Thời trang</td>
-                <td>Quần áo, giày dép, và phụ kiện thời trang.</td>
+                <td>202</td>
+                <td>Hướng dẫn tối ưu SEO cho người mới bắt đầu</td>
+                <td>Editor</td>
+                <td>Marketing</td>
+                <td>10/11/2025</td>
+                <td><span class="status status-draft">Bản nháp</span></td>
                 <td>
                     <a href="#" class="btn btn-edit">Sửa</a>
                     <a href="#" class="btn btn-delete">Xóa</a>
                 </td>
             </tr>
             <tr>
-                <td>3</td>
-                <td>Sách</td>
-                <td>Sách văn học, sách kỹ năng, và truyện tranh.</td>
+                <td>203</td>
+                <td>Đánh giá chi tiết iPhone 17: Liệu có đáng nâng cấp?</td>
+                <td>Admin</td>
+                <td>Đánh giá</td>
+                <td>01/11/2025</td>
+                <td><span class="status status-published">Đã xuất bản</span></td>
                 <td>
                     <a href="#" class="btn btn-edit">Sửa</a>
                     <a href="#" class="btn btn-delete">Xóa</a>
                 </td>
             </tr>
             <tr>
-                <td>4</td>
-                <td>Đồ gia dụng</td>
-                <td>Các vật dụng cho nhà bếp, phòng khách.</td>
+                <td>204</td>
+                <td>5 công thức nấu ăn đơn giản tại nhà</td>
+                <td>GuestAuthor</td>
+                <td>Ẩm thực</td>
+                <td>28/10/2025</td>
+                <td><span class="status status-published">Đã xuất bản</span></td>
                 <td>
                     <a href="#" class="btn btn-edit">Sửa</a>
                     <a href="#" class="btn btn-delete">Xóa</a>

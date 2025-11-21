@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}"> <head>
+    <title>Popular Books</title> </head>
 
-    <section layout:fragment="popular-books" id="popular-books" class="bookshelf py-5 my-5">
-        <div class="container">
+<body>
+    <section layout:fragment="content" id="popular-books" class="bookshelf py-5 my-5">        <div class="container">
             <div class="row">
                 <div class="col-md-12">
 
@@ -422,6 +424,5 @@
         </div>
     </section>
 
-
-
+</body>
 </html>

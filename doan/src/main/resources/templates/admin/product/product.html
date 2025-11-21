@@ -1,16 +1,180 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/admin/layout}"> <head>
+      layout:decorate="~{/admin/layout}">
+<head>
     <meta charset="UTF-8">
-    <title>Category</title>
+    <title>Product</title>
 </head>
 <body>
 
-    <div layout:fragment="content">
+<div layout:fragment="content">
 
-        <div>Trang product</div>
+    <style>
+        /* Container chung của trang */
+        .page-container {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        /* Tiêu đề trang và nút Thêm mới */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .page-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        /* Kiểu nút chung */
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 0 4px;
+        }
+        .btn:hover {
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Các nút cụ thể */
+        .btn-add {
+            background-color: #28a745; /* Màu xanh lá */
+        }
+        .btn-edit {
+            background-color: #007bff; /* Màu xanh dương */
+        }
+        .btn-delete {
+            background-color: #dc3545; /* Màu đỏ */
+        }
+
+        /* Kiểu bảng dữ liệu */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: middle; /* Căn giữa theo chiều dọc */
+        }
+
+        /* Tiêu đề bảng */
+        .data-table th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Các hàng xen kẽ */
+        .data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Hiệu ứng khi di chuột qua hàng */
+        .data-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Căn giữa cột hành động và các cột số */
+        .data-table td:last-child,
+        .text-center {
+            text-align: center;
+        }
+
+        /* CSS cho ảnh thumbnail sản phẩm */
+        .product-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover; /* Đảm bảo ảnh vừa vặn, không bị méo */
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <div class="page-container">
+
+        <div class="page-header">
+            <h2>Quản lý Sản phẩm</h2>
+<!--            <a href="#" class="btn btn-add">Thêm mới Sản phẩm</a>-->
+        </div>
+
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th class="text-center">Hình ảnh</th>
+                <th>Tên Sản phẩm</th>
+                <th>Giá</th>
+                <th>Danh mục</th>
+                <th class="text-center">Tồn kho</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>101</td>
+                <td class="text-center">
+                    <img src="" alt="Sản phẩm 1" class="product-thumb">
+                </td>
+                <td>iPhone 15 Pro Max</td>
+                <td>34,990,000đ</td>
+                <td>Điện tử</td>
+                <td class="text-center">50</td>
+                <td>
+                    <a href="#" class="btn btn-edit">Sửa</a>
+                    <a href="#" class="btn btn-delete">Xóa</a>
+                </td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td class="text-center">
+                    <img src="" alt="Sản phẩm 2" class="product-thumb">
+                </td>
+                <td>Giày Nike Air Force 1</td>
+                <td>2,790,000đ</td>
+                <td>Thời trang</td>
+                <td class="text-center">120</td>
+                <td>
+                    <a href="#" class="btn btn-edit">Sửa</a>
+                    <a href="#" class="btn btn-delete">Xóa</a>
+                </td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td class="text-center">
+                    <img src="" alt="Sản phẩm 3" class="product-thumb">
+                </td>
+                <td>Sách "Nhà Giả Kim"</td>
+                <td>79,000đ</td>
+                <td>Sách</td>
+                <td class="text-center">300</td>
+                <td>
+                    <a href="#" class="btn btn-edit">Sửa</a>
+                    <a href="#" class="btn btn-delete">Xóa</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
+</div>
 
 </body>
 </html>
