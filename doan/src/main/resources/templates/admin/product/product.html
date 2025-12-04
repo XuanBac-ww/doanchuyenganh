@@ -4,176 +4,222 @@
       layout:decorate="~{/admin/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Product</title>
+    <title>Quản lý Sản phẩm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <div layout:fragment="content">
 
-    <style>
-        /* Container chung của trang */
-        .page-container {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+    <div class="container-fluid px-4 mt-4">
 
-        /* Tiêu đề trang và nút Thêm mới */
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-
-        .page-header h2 {
-            margin: 0;
-            color: #333;
-        }
-
-        /* Kiểu nút chung */
-        .btn {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin: 0 4px;
-        }
-        .btn:hover {
-            opacity: 0.85;
-            transition: opacity 0.2s ease;
-        }
-
-        /* Các nút cụ thể */
-        .btn-add {
-            background-color: #28a745; /* Màu xanh lá */
-        }
-        .btn-edit {
-            background-color: #007bff; /* Màu xanh dương */
-        }
-        .btn-delete {
-            background-color: #dc3545; /* Màu đỏ */
-        }
-
-        /* Kiểu bảng dữ liệu */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .data-table th, .data-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-            vertical-align: middle; /* Căn giữa theo chiều dọc */
-        }
-
-        /* Tiêu đề bảng */
-        .data-table th {
-            background-color: #f4f4f4;
-            color: #333;
-            font-weight: bold;
-        }
-
-        /* Các hàng xen kẽ */
-        .data-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        /* Hiệu ứng khi di chuột qua hàng */
-        .data-table tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Căn giữa cột hành động và các cột số */
-        .data-table td:last-child,
-        .text-center {
-            text-align: center;
-        }
-
-        /* CSS cho ảnh thumbnail sản phẩm */
-        .product-thumb {
-            width: 60px;
-            height: 60px;
-            object-fit: cover; /* Đảm bảo ảnh vừa vặn, không bị méo */
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-    </style>
-    <div class="page-container">
-
-        <div class="page-header">
-            <h2>Quản lý Sản phẩm</h2>
-<!--            <a href="#" class="btn btn-add">Thêm mới Sản phẩm</a>-->
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+            <h2 class="text-dark m-0">Quản lý Sản phẩm</h2>
+            <button onclick="toggleForm()" class="btn btn-success">
+                <i class="fas fa-plus"></i> Thêm mới Sản phẩm
+            </button>
         </div>
 
-        <table class="data-table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th class="text-center">Hình ảnh</th>
-                <th>Tên Sản phẩm</th>
-                <th>Giá</th>
-                <th>Danh mục</th>
-                <th class="text-center">Tồn kho</th>
-                <th>Hành động</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>101</td>
-                <td class="text-center">
-                    <img src="" alt="Sản phẩm 1" class="product-thumb">
-                </td>
-                <td>iPhone 15 Pro Max</td>
-                <td>34,990,000đ</td>
-                <td>Điện tử</td>
-                <td class="text-center">50</td>
-                <td>
-                    <a href="#" class="btn btn-edit">Sửa</a>
-                    <a href="#" class="btn btn-delete">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td>102</td>
-                <td class="text-center">
-                    <img src="" alt="Sản phẩm 2" class="product-thumb">
-                </td>
-                <td>Giày Nike Air Force 1</td>
-                <td>2,790,000đ</td>
-                <td>Thời trang</td>
-                <td class="text-center">120</td>
-                <td>
-                    <a href="#" class="btn btn-edit">Sửa</a>
-                    <a href="#" class="btn btn-delete">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td>103</td>
-                <td class="text-center">
-                    <img src="" alt="Sản phẩm 3" class="product-thumb">
-                </td>
-                <td>Sách "Nhà Giả Kim"</td>
-                <td>79,000đ</td>
-                <td>Sách</td>
-                <td class="text-center">300</td>
-                <td>
-                    <a href="#" class="btn btn-edit">Sửa</a>
-                    <a href="#" class="btn btn-delete">Xóa</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div id="form-add" class="card mb-4 shadow-sm border-success" style="display: none;">
+            <div class="card-header bg-success text-white font-weight-bold">
+                <span th:text="${product.id == null || product.id == 0} ? 'Thêm mới Sản phẩm' : 'Cập nhật Sản phẩm'"></span>
+            </div>
+            <div class="card-body">
+                <form method="post" th:object="${product}"
+                      th:action="${product.id == null || product.id == 0} ? 'save' : 'update'">
+
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Tên Sản phẩm:</label>
+                            <input type="text" th:field="*{name}" class="form-control" placeholder="Nhập tên sản phẩm..." required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Giá (VNĐ):</label>
+                            <input type="number" th:field="*{price}" class="form-control" placeholder="Nhập giá..." required />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Link Hình ảnh:</label>
+                            <input type="text" th:field="*{image}" class="form-control" placeholder="URL hình ảnh..." />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Mô tả ngắn:</label>
+                        <textarea th:field="*{description}" class="form-control" rows="2" placeholder="Mô tả ngắn..."></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nội dung chi tiết:</label>
+                        <textarea th:field="*{content}" class="form-control" rows="4" placeholder="Nội dung chi tiết..."></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Trạng thái:</label>
+                        <select th:field="*{status}" class="form-select">
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Ẩn</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success">Lưu lại</button>
+
+                        <a th:if="${product.id != null && product.id > 0}"
+                           th:href="@{/admin/product/all}" class="btn btn-secondary">Hủy bỏ</a>
+
+                        <button th:unless="${product.id != null && product.id > 0}"
+                                type="button" onclick="toggleForm()" class="btn btn-secondary">Hủy bỏ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <table class="table table-bordered table-hover table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="text-center" style="width: 50px;">ID</th>
+                        <th class="text-center" style="width: 80px;">Hình ảnh</th>
+                        <th>Tên Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Danh mục</th>
+                        <th class="text-center">Trạng thái</th>
+                        <th class="text-center" style="width: 150px;">Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td class="text-center" th:text="${product.id}">1</td>
+                        <td class="text-center">
+                            <img th:if="${product.image != null and product.image != ''}"
+                                 th:src="${product.image}" class="img-thumbnail"
+                                 style="width: 50px; height: 50px; object-fit: cover;" />
+                            <span th:unless="${product.image != null and product.image != ''}" class="text-muted small">No Img</span>
+                        </td>
+                        <td th:text="${product.name}" class="fw-bold">Tên SP</td>
+                        <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'" class="text-danger fw-bold">0 đ</td>
+
+                        <td><span class="text-muted fst-italic">Chưa có</span></td>
+
+                        <td class="text-center">
+                            <span th:if="${product.status == 1}" class="badge bg-success">Hiển thị</span>
+                            <span th:if="${product.status == 0}" class="badge bg-secondary">Ẩn</span>
+                        </td>
+
+                        <td class="text-center">
+                            <a th:href="@{/admin/product/update(id=${product.id})}" class="btn btn-sm btn-primary">Sửa</a>
+                            <button type="button" class="btn btn-sm btn-danger"
+                                    th:onclick="'openDeleteModal(' + ${product.id} + ')'">Xóa</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteModal()"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-3 text-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                    </div>
+                    <p class="fw-bold">Bạn có chắc chắn muốn xóa sản phẩm này?</p>
+                    <p class="small text-muted">Hành động này không thể hoàn tác.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeDeleteModal()">Hủy bỏ</button>
+
+                    <form th:action="@{/admin/product/delete}" method="post">
+                        <input type="hidden" name="id" id="deleteIdInput" value="" />
+                        <button type="submit" class="btn btn-danger">Xác nhận Xóa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Logic ẩn hiện Form
+        function toggleForm() {
+            var form = document.getElementById("form-add");
+            if (form.style.display === "none" || form.style.display === "") {
+                form.style.display = "block";
+                form.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                form.style.display = "none";
+            }
+        }
+
+        // Tự động mở form khi ở chế độ Update
+        if (window.location.href.indexOf("update") > -1) {
+            var form = document.getElementById("form-add");
+            if (form) {
+                form.style.display = "block";
+                // Cuộn nhẹ để user thấy form
+                setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+            }
+        }
+
+        // 2. Logic Modal Xóa (Sử dụng Bootstrap JS API)
+        // Lưu ý: Cần đảm bảo file Layout của bạn đã nhúng Bootstrap JS
+
+        var myModal = null; // Biến giữ đối tượng Modal
+
+        function openDeleteModal(id) {
+            document.getElementById("deleteIdInput").value = id;
+
+            // Cách gọi Modal Bootstrap 5 thuần JS
+            var modalElement = document.getElementById('deleteModal');
+
+            // Kiểm tra xem trình duyệt có tải được Bootstrap JS chưa
+            if (typeof bootstrap !== 'undefined') {
+                if (!myModal) {
+                    myModal = new bootstrap.Modal(modalElement);
+                }
+                myModal.show();
+            } else {
+                // Fallback nếu chưa có JS Bootstrap (Dùng CSS thuần để hiện)
+                modalElement.classList.add('show');
+                modalElement.style.display = 'block';
+                document.body.classList.add('modal-open');
+
+                // Tạo backdrop thủ công
+                var backdrop = document.createElement('div');
+                backdrop.className = 'modal-backdrop fade show';
+                backdrop.id = 'customBackdrop';
+                document.body.appendChild(backdrop);
+            }
+        }
+
+        function closeDeleteModal() {
+            if (myModal) {
+                myModal.hide();
+            } else {
+                // Fallback đóng thủ công
+                var modalElement = document.getElementById('deleteModal');
+                modalElement.classList.remove('show');
+                modalElement.style.display = 'none';
+                document.body.classList.remove('modal-open');
+                var backdrop = document.getElementById('customBackdrop');
+                if(backdrop) backdrop.remove();
+            }
+        }
+    </script>
 </div>
 
 </body>
