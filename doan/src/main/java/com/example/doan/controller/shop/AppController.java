@@ -1,4 +1,4 @@
-package com.example.doan.controller;
+package com.example.doan.controller.shop;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +19,6 @@ public class AppController {
     @GetMapping("/blog")
     public String showBlogPage() {
         return "home/blog";
-    }
-
-    @GetMapping("/our-store")
-    public String showProductPage() {
-        return "home/our-store";
     }
 
     @GetMapping("/contact")

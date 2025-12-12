@@ -1,4 +1,4 @@
-package com.example.doan.controller;
+package com.example.doan.controller.admin;
 
 import com.example.doan.models.Product;
 import com.example.doan.service.product.IProductService;
@@ -11,15 +11,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/product")
-public class ProductController {
+public class AdminProductController {
 
     private final IProductService productService;
 
     @Autowired
-    public ProductController(IProductService productService) {
+    public AdminProductController(IProductService productService) {
         this.productService = productService;
     }
-
 
     @GetMapping("/all")
     public String findAll(Model model) {

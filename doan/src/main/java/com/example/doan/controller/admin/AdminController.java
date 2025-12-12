@@ -1,4 +1,4 @@
-package com.example.doan.controller;
+package com.example.doan.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

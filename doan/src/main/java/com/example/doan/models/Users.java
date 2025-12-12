@@ -1,9 +1,8 @@
 package com.example.doan.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Users {
@@ -17,8 +16,9 @@ public class Users {
     private String password;
     private String roles;
 
-
-
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Authorities> authorities;
 
 
     public Users(String username, String password, String role) {

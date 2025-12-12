@@ -1,4 +1,4 @@
-package com.example.doan.controller;
+package com.example.doan.controller.admin;
 
 import com.example.doan.models.Category;
 import com.example.doan.service.category.ICategoryService;
@@ -11,12 +11,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/category")
-public class CategoryController {
+public class AdminCategoryController {
 
     private final ICategoryService categoryService;
 
     @Autowired
-    public CategoryController(ICategoryService categoryService) {
+    public AdminCategoryController(ICategoryService categoryService) {
         this.categoryService = categoryService;
     }
 

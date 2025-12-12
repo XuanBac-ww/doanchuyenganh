@@ -20,7 +20,7 @@ public class Product {
 
     private String content;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}) // hoac Cascade.ALL
     @JoinColumn(name = "id_category")
     private Category category;
 
@@ -28,6 +28,28 @@ public class Product {
 
     public Integer getId() {
         return id;
+    }
+
+    public Product(String name, String image, float price, String description, String content, Category category, int status) {
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.content = content;
+        this.category = category;
+        this.status = status;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Product(Category category) {
+        this.category = category;
     }
 
     public void setId(Integer id) {
@@ -68,24 +90,6 @@ public class Product {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Product(String name, String image, float price, String description, String content, Category category, int status) {
-        this.name = name;
-        this.image = image;
-        this.price = price;
-        this.description = description;
-        this.content = content;
-        this.category = category;
-        this.status = status;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public void setPrice(float price) {
