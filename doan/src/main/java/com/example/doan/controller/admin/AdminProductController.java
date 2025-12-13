@@ -1,6 +1,8 @@
 package com.example.doan.controller.admin;
 
+import com.example.doan.models.Category;
 import com.example.doan.models.Product;
+import com.example.doan.service.category.ICategoryService;
 import com.example.doan.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,18 +16,25 @@ import java.util.List;
 public class AdminProductController {
 
     private final IProductService productService;
+    private final ICategoryService categoryService;
 
     @Autowired
-    public AdminProductController(IProductService productService) {
+    public AdminProductController(IProductService productService, ICategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/all")
     public String findAll(Model model) {
         List<Product> products = productService.findAll();
-        model.addAttribute("products",products);
+        model.addAttribute("products", products);
 
-        model.addAttribute("product", new Product());
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
+        Product newProduct = new Product();
+        newProduct.setCategory(new Category());
+        model.addAttribute("product", newProduct);
+
         return "admin/product/product";
     }
 
@@ -39,8 +48,10 @@ public class AdminProductController {
     @GetMapping("/update")
     public String showFormUpdate(@RequestParam("id") int id, Model model) {
         Product product = productService.findById(id);
-        model.addAttribute("product",product);
-        model.addAttribute("products",productService.findAll());
+        model.addAttribute("product", product);
+        model.addAttribute("categories", categoryService.findAll());
+
+        model.addAttribute("products", productService.findAll());
         return "admin/product/product";
     }
 

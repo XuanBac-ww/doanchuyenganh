@@ -20,7 +20,7 @@ public class Product {
 
     private String content;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}) // hoac Cascade.ALL
+    @ManyToOne
     @JoinColumn(name = "id_category")
     private Category category;
 

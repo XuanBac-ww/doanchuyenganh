@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">
+<head>
+    <title>Our Store - BOOKSAW</title>
+</head>
+<body>
+
+<section layout:fragment="content" class="container py-5 mt-5" id="store-content">
+
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="fw-bold text-dark">Danh Sách Danh Mục</h2>
+            <p class="text-muted">Khám phá các thể loại sách phong phú của chúng tôi</p>
+        </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(categories)}" class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="alert alert-warning text-center shadow-sm">
+                <i class="fa-solid fa-triangle-exclamation me-2"></i> Chưa có danh mục nào.
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4" th:unless="${#lists.isEmpty(categories)}">
+
+        <div class="col-6 col-md-4 col-lg-3"
+             th:each="category : ${categories}"
+             th:if="${category.status == 1}">
+
+            <a th:href="@{/category/{id}(id=${category.id})}" class="text-decoration-none">
+
+                <div class="card h-100 border-0 shadow-sm transition-hover">
+
+                    <img th:if="${category.image != null and category.image != ''}"
+                         th:src="${category.image}"
+                         class="card-img-top p-3"
+                         alt="Ảnh danh mục"
+                         style="height: 180px; object-fit: contain; background-color: #f8f9fa;">
+
+                    <div th:unless="${category.image != null and category.image != ''}"
+                         class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted"
+                         style="height: 180px;">
+                        <i class="fa-regular fa-image fa-2x"></i>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold text-dark mb-0" th:text="${category.name}">Tên danh mục</h5>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
+

@@ -49,4 +49,14 @@ public class ProductDAOImpl implements ProductDAO {
     public Product update(Product product) {
         return entityManager.merge(product);
     }
+
+    @Override
+    public List<Product> findByCategoryId(int categoryId) {
+        String jpql = "FROM Product p WHERE p.category.id = :theCategoryId";
+
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("theCategoryId", categoryId);
+
+        return query.getResultList();
+    }
 }

@@ -66,6 +66,17 @@
                         </select>
                     </div>
 
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Danh mục:</label>
+                        <select th:field="*{category.id}" class="form-select">
+                            <option value="">-- Chọn danh mục --</option>
+                            <option th:each="cat : ${categories}"
+                                    th:value="${cat.id}"
+                                    th:text="${cat.name}">
+                            </option>
+                        </select>
+                    </div>
+
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-success">Lưu lại</button>
 
@@ -105,7 +116,13 @@
                         <td th:text="${product.name}" class="fw-bold">Tên SP</td>
                         <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'" class="text-danger fw-bold">0 đ</td>
 
-                        <td><span class="text-muted fst-italic">Chưa có</span></td>
+                        <td>
+                            <span th:if="${product.category != null}"
+                                  th:text="${product.category.name}">Tên Danh Mục</span>
+
+                            <span th:unless="${product.category != null}"
+                                  class="text-muted fst-italic">Chưa có</span>
+                        </td>
 
                         <td class="text-center">
                             <span th:if="${product.status == 1}" class="badge bg-success">Hiển thị</span>

@@ -16,4 +16,5 @@ public interface IProductService {
 
     Product update(Product product);
 
+    List<Product> findByCategoryId(int id);
 }

@@ -71,25 +71,29 @@
                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" th:unless="${products == null or products.empty}">
 
                     <div class="col" th:each="item : ${products}">
-                        <div class="card h-100 shadow-sm border-0 rounded-3">
 
-                            <img th:src="${item.image != null and item.image != '' ? item.image : 'https://placehold.co/300x450/EAE0D5/6B4F4F?text=No+Image'}"
-                                 class="card-img-top"
-                                 th:alt="${item.name}"
-                                 style="object-fit: cover; height: 300px;" />
+                        <a th:href="@{/product-detail/{id}(id=${item.id})}" class="text-decoration-none text-dark">
 
-                            <div class="card-body text-center">
+                            <div class="card h-100 shadow-sm border-0 rounded-3">
 
-                                <h5 class="card-title fs-6 fw-bold" th:text="${item.name}">Tên sách mẫu</h5>
+                                <img th:src="${item.image != null and item.image != '' ? item.image : 'https://placehold.co/300x450/EAE0D5/6B4F4F?text=No+Image'}"
+                                     class="card-img-top"
+                                     th:alt="${item.name}"
+                                     style="object-fit: cover; height: 300px;" />
 
-                                <p class="card-text fw-bold text-dark mb-2"
-                                   th:text="${item.price != null ? #numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') : 0} + ' đ'">
-                                    0 đ
-                                </p>
+                                <div class="card-body text-center">
 
-                                <a href="#" class="btn btn-dark btn-sm">Add to Cart</a>
+                                    <h5 class="card-title fs-6 fw-bold" th:text="${item.name}">Tên sách mẫu</h5>
+
+                                    <p class="card-text fw-bold text-dark mb-2"
+                                       th:text="${item.price != null ? #numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') : 0} + ' đ'">
+                                        0 đ
+                                    </p>
+
+                                    <button class="btn btn-dark btn-sm">Add to Cart</button>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

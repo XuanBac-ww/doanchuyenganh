@@ -15,18 +15,18 @@ public class DoanApplication {
 		SpringApplication.run(DoanApplication.class, args);
 	}
 
-	@Bean
-    public CommandLineRunner cammandLineRunner(AppDAO appDAO){
-        return runner->{
-            createCategoryWithProduct(appDAO);
-        };
-    }
-
-    private void createCategoryWithProduct(AppDAO appDAO) {
-        Category tempCategory = new Category("SanPhamMoi","abc.png",1);
-        Product tempProduct = new Product("abc","abc.png",100,"abc","day la cuon sach cua toi",tempCategory,1);
-        tempCategory.add(tempProduct);
-        appDAO.save(tempCategory);
-        System.out.println("Da xong");
-    }
+//	@Bean
+//    public CommandLineRunner cammandLineRunner(AppDAO appDAO){
+//        return runner->{
+//            createCategoryWithProduct(appDAO);
+//        };
+//    }
+//
+//    private void createCategoryWithProduct(AppDAO appDAO) {
+//        Category tempCategory = new Category("SanPhamMoi","abc.png",1);
+//        Product tempProduct = new Product("abc","abc.png",100,"abc","day la cuon sach cua toi",tempCategory,1);
+//        tempCategory.add(tempProduct);
+//        appDAO.save(tempCategory);
+//        System.out.println("Da xong");
+//    }
 }

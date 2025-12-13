@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">
+<head>
+    <title th:text="${product.name} + ' - Chi tiết sản phẩm'">Chi tiết sản phẩm</title>
+
+    <style>
+        .product-img-wrapper {
+            background-color: transparent;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: #d0011b; /* Đỏ shopee */
+            font-weight: 700;
+        }
+
+
+        .h-action {
+            height: 48px !important;
+        }
+
+        .quantity-group {
+            width: 130px;
+            flex-shrink: 0; /* Không bị co lại */
+        }
+
+        .quantity-group .btn {
+            border-color: #ced4da;
+            background-color: #fff;
+            z-index: 0;
+        }
+
+        .quantity-group .form-control {
+            border-color: #ced4da;
+            border-left: 0;
+            border-right: 0;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Xóa hiệu ứng xanh (focus ring) khi click vào input để không lệch */
+        .quantity-group .form-control:focus {
+            box-shadow: none;
+            border-color: #ced4da;
+        }
+
+        /* Ẩn mũi tên tăng giảm mặc định của trình duyệt */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* --- 3. Style nút mua hàng --- */
+        .btn-add-cart {
+            background-color: #e5f2ff; /* Xanh rất nhạt */
+            color: #0d6efd;
+            border: 1px solid #0d6efd;
+            font-weight: 600;
+            white-space: nowrap; /* Chống xuống dòng chữ */
+        }
+        .btn-add-cart:hover {
+            background-color: #cce5ff;
+        }
+
+        .btn-buy-now {
+            background-color: #d0011b;
+            color: white;
+            border: 1px solid #d0011b;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .btn-buy-now:hover {
+            background-color: #b50118;
+            color: white;
+        }
+
+        /* --- 4. Box Chính sách --- */
+        .policy-box {
+            background-color: #fff;
+            border: 1px dashed #ccc;
+            border-radius: 6px;
+        }
+
+        /* Breadcrumb đẹp hơn */
+        .breadcrumb-item a { color: #666; text-decoration: none; }
+        .breadcrumb-item.active { color: #333; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="container py-4">
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-transparent p-0 small">
+                <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:text="${product.name}">Tên sản phẩm</li>
+            </ol>
+        </nav>
+
+        <div class="row gx-5">
+            <div class="col-md-5 mb-4">
+                <div class="product-img-wrapper">
+                    <img th:src="${product.image != null and product.image != '' ? product.image : 'https://placehold.co/500x500/EAE0D5/6B4F4F?text=No+Image'}"
+                         class="img-fluid rounded"
+                         th:alt="${product.name}"
+                         style="max-height: 450px; object-fit: contain;">
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <h1 class="fw-bold fs-3 mb-2" th:text="${product.name}">Tên Sản Phẩm</h1>
+
+                <div class="d-flex align-items-center mb-3 text-muted small">
+                    <span class="badge bg-light text-dark border me-2" th:if="${product.category != null}" th:text="${product.category.name}">Danh mục</span>
+                    <span>Mã SP: <strong class="text-dark" th:text="${product.id}">123</strong></span>
+                    <span class="mx-2">|</span>
+                    <span class="text-success"><i class="bi bi-check-circle-fill"></i> Còn hàng</span>
+                </div>
+
+                <div class="bg-light p-3 rounded mb-4">
+                    <h3 class="product-price mb-0"
+                        th:text="${product.price != null ? #numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') : 0} + ' đ'">
+                        500.000 đ
+                    </h3>
+                </div>
+
+                <p class="text-secondary mb-4" th:text="${product.description}" style="line-height: 1.6;">
+                    Mô tả ngắn gọn về sản phẩm.
+                </p>
+
+                <form action="#" method="post" class="mb-5">
+                        <div class="d-flex gap-2 flex-grow-1" style="min-width: 250px;">
+                            <button class="btn btn-add-cart h-action flex-grow-1" type="button">
+                                <i class="bi bi-cart-plus me-1"></i> THÊM VÀO GIỎ
+                            </button>
+                        </div>
+                </form>
+
+                <div class="policy-box p-3">
+                    <div class="row g-2">
+                        <div class="col-6 d-flex align-items-center">
+                            <i class="bi bi-truck fs-4 text-primary me-3"></i>
+                            <div>
+                                <small class="fw-bold d-block">Miễn phí vận chuyển</small>
+                                <small class="text-muted" style="font-size: 12px;">Đơn từ 500k</small>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex align-items-center">
+                            <i class="bi bi-shield-check fs-4 text-primary me-3"></i>
+                            <div>
+                                <small class="fw-bold d-block">Cam kết chính hãng</small>
+                                <small class="text-muted" style="font-size: 12px;">Hoàn tiền 100%</small>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex align-items-center mt-3">
+                            <i class="bi bi-arrow-repeat fs-4 text-primary me-3"></i>
+                            <div>
+                                <small class="fw-bold d-block">Đổi trả 7 ngày</small>
+                                <small class="text-muted" style="font-size: 12px;">Thủ tục đơn giản</small>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex align-items-center mt-3">
+                            <i class="bi bi-headset fs-4 text-primary me-3"></i>
+                            <div>
+                                <small class="fw-bold d-block">Hỗ trợ 24/7</small>
+                                <small class="text-muted" style="font-size: 12px;">Hotline 1900 xxxx</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white border-bottom-0 pt-4 px-4">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active text-dark fw-bold border-top-0 border-start-0 border-end-0"
+                                        id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button"
+                                >
+                                    MÔ TẢ SẢN PHẨM
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="desc" role="tabpanel">
+                                <div class="product-content" th:utext="${product.content}" style="line-height: 1.8;">
+                                    <p class="text-muted fst-italic">Nội dung chi tiết đang cập nhật...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function increaseQty() {
+            var input = document.getElementById('qtyInput');
+            var val = parseInt(input.value);
+            if (!isNaN(val)) {
+                input.value = val + 1;
+            }
+        }
+
+        function decreaseQty() {
+            var input = document.getElementById('qtyInput');
+            var val = parseInt(input.value);
+            if (!isNaN(val) && val > 1) {
+                input.value = val - 1;
+            }
+        }
+    </script>
+
+</div>
+</body>
+</html>
