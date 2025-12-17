@@ -1,13 +1,28 @@
 package com.example.doan.controller.shop;
 
+import com.example.doan.models.Product;
+import com.example.doan.service.product.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 public class AppController {
 
+    private final IProductService productService;
+
+    @Autowired
+    public AppController(IProductService productService) {
+        this.productService = productService;
+    }
+
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        List<Product> listProducts = productService.findAll();
+        model.addAttribute("products", listProducts);
         return "index";
     }
 

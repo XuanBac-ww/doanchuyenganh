@@ -1,47 +1,117 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <section layout:fragment="best-selling" id="best-selling" class="leaf-pattern-overlay">
-        <div class="corner-pattern-overlay"></div>
-        <div class="container">
-            <div class="row justify-content-center">
 
-                <div class="col-md-8">
+<section layout:fragment="best-selling" id="best-selling" class="leaf-pattern-overlay">
+    <div class="corner-pattern-overlay"></div>
 
-                    <div class="row">
-
-                        <div class="col-md-6">
-                            <figure class="products-thumb">
-                                <img src="images/single-image.jpg" alt="book" class="single-image">
-                            </figure>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="product-entry">
-                                <h2 class="section-title divider">Best Selling Book</h2>
-
-                                <div class="products-content">
-                                    <div class="author-name">By Timbur Hood</div>
-                                    <h3 class="item-title">Birds gonna be happy</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                        libero ipsum enim pharetra hac.</p>
-                                    <div class="item-price">$ 45.00</div>
-                                    <div class="btn-wrap">
-                                        <a href="#" class="btn-accent-arrow">shop it now <i
-                                                class="icon icon-ns-arrow-right"></i></a>
-                                    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <figure class="products-thumb">
+                            <img src="images/single-image.jpg" alt="book" class="single-image">
+                        </figure>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-entry">
+                            <h2 class="section-title divider">Best Selling Book</h2>
+                            <div class="products-content">
+                                <div class="author-name">By Timbur Hood</div>
+                                <h3 class="item-title">Birds gonna be happy</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                                <div class="item-price">$ 45.00</div>
+                                <div class="btn-wrap">
+                                    <a href="#" class="btn-accent-arrow">shop it now <i class="icon icon-ns-arrow-right"></i></a>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         </div>
-    </section>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h3 class="section-title">Recommend For You</h3>
+            </div>
+        </div>
+
+        <div class="position-relative px-4">
+
+            <div class="position-relative px-4" style="margin: 0 50px;">
+                <button class="btn bg-white shadow rounded-circle position-absolute top-50 translate-middle-y z-3"
+                                                                                 onclick="scrollRecommend('left')"
+                                                                                 style="width: 50px; height: 50px; left: -60px; display: flex; align-items: center; justify-content: center; border: 1px solid #eee;">
+                <span style="font-size: 24px; color: #333; font-weight: bold; padding-right: 2px;">&lt;</span>
+            </button>
+
+                <div id="recommendList"
+                     class="d-flex overflow-auto pb-4 hide-scrollbar"
+                     style="gap: 20px; scroll-behavior: smooth; white-space: nowrap;">
+
+                    <div class="card border-0 shadow-sm flex-shrink-0"
+                         style="width: 250px; border-radius: 15px; background: rgba(255,255,255,0.95);"
+                         th:each="product : ${products}">
+
+                        <div class="card-body text-center d-flex flex-column align-items-center">
+                            <img th:src="${product.image}"
+                                 class="img-fluid mb-3"
+                                 style="height: 180px; width: 100%; object-fit: contain;"
+                                 alt="Product Image">
+
+                            <h6 class="card-title fw-bold text-dark mb-1 text-wrap"
+                                style="height: 40px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"
+                                th:text="${product.name}">Tên SP</h6>
+
+                            <p class="text-danger fw-bold mb-3">
+                                <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">0</span> đ
+                            </p>
+
+                            <a th:href="@{/product-detail/{id}(id=${product.id})}"
+                               class="btn btn-sm btn-outline-dark rounded-pill px-4">
+                                Xem CHI TIẾT
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn bg-white shadow rounded-circle position-absolute top-50 translate-middle-y z-3"
+                        onclick="scrollRecommend('right')"
+                        style="width: 50px; height: 50px; right: -60px; display: flex; align-items: center; justify-content: center; border: 1px solid #eee;">
+                    <span style="font-size: 24px; color: #333; font-weight: bold; padding-left: 2px;">&gt;</span>
+                </button>
+            </div>
 
 
+        </div>
+    </div>
+
+    <style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+    <script>
+        function scrollRecommend(direction) {
+            const container = document.getElementById('recommendList');
+            const scrollAmount = 300;
+
+            if (direction === 'left') {
+                container.scrollLeft -= scrollAmount;
+            } else {
+                container.scrollLeft += scrollAmount;
+            }
+        }
+    </script>
+
+</section>
 </html>
