@@ -77,4 +77,9 @@ public class AppController {
         return "login";
     }
 
+    @GetMapping("/cart")
+    public String cartPage() {
+        return "login";
+    }
+
 }
