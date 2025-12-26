@@ -70,7 +70,7 @@
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" th:unless="${products == null or products.empty}">
 
-                    <div class="col" th:each="item : ${products}">
+                    <div class="col" th:each="item : ${products}" th:if="${item.status == 1}">
 
                         <a th:href="@{/product-detail/{id}(id=${item.id})}" class="text-decoration-none text-dark">
 
@@ -96,7 +96,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
 
             <nav aria-label="Page navigation" class="mt-5">
                 <ul class="pagination justify-content-center">
