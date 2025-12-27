@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Liên hệ (Contact)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container-fluid px-4 mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+            <h2 class="text-dark m-0">Quản lý Liên hệ</h2>
+        </div>
+
+        <div id="form-edit" class="card mb-4 shadow-sm border-primary" style="display: none;">
+            <div class="card-header bg-primary text-white fw-bold">
+                <span id="formTitle">Chi tiết Liên hệ & Cập nhật Trạng thái</span>
+            </div>
+            <div class="card-body">
+                <form id="contactForm" role="form" method="post" th:object="${contact}" th:action="@{/admin/contact/update}">
+
+                    <input type="hidden" id="contactId" th:field="*{id}" />
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Họ và Tên</label>
+                                <input type="text" id="fullName" th:field="*{fullName}" class="form-control bg-light" readonly />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Email</label>
+                                <input type="email" id="email" th:field="*{email}" class="form-control bg-light" readonly />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Trạng thái xử lý</label>
+                                <select id="responseStatus" th:field="*{responseStatus}" class="form-select bg-white border-warning fw-bold text-dark">
+                                    <option value="0" class="text-danger">Chưa phản hồi</option>
+                                    <option value="1" class="text-success">Đã phản hồi</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nội dung tin nhắn</label>
+                        <textarea id="message" th:field="*{message}" class="form-control bg-light" rows="4" readonly></textarea>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Lưu cập nhật</button>
+                        <button type="button" onclick="closeForm()" class="btn btn-secondary">Đóng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <table class="table table-bordered table-hover table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="text-center" style="width: 50px;">ID</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Nội dung</th>
+                        <th class="text-center" style="width: 150px;">Trạng thái</th>
+                        <th class="text-center" style="width: 150px;">Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${contacts}">
+                        <td class="text-center fw-bold" th:text="${item.id}"></td>
+                        <td th:text="${item.fullName}"></td>
+                        <td th:text="${item.email}"></td>
+
+                        <td th:text="${#strings.abbreviate(item.message, 50)}"></td>
+
+                        <td class="text-center">
+                            <span th:if="${item.responseStatus == 1}" class="badge bg-success">Đã phản hồi</span>
+                            <span th:if="${item.responseStatus == 0}" class="badge bg-danger">Chưa phản hồi</span>
+                        </td>
+
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-primary"
+                                    th:data-id="${item.id}"
+                                    th:data-fullname="${item.fullName}"
+                                    th:data-email="${item.email}"
+                                    th:data-message="${item.message}"
+                                    th:data-status="${item.responseStatus}"
+                                    onclick="editContact(this)">
+                                Sửa
+                            </button>
+
+                            <button type="button" class="btn btn-sm btn-danger"
+                                    th:onclick="'openDeleteModal(' + ${item.id} + ')'">
+                                Xóa
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(contacts)}">
+                        <td colspan="6" class="text-center text-muted py-4">
+                            Không có liên hệ nào.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeDeleteModal()"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-3 text-danger"><i class="fas fa-exclamation-triangle fa-3x"></i></div>
+                    <p class="fw-bold">Bạn có chắc chắn muốn xóa liên hệ này?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Hủy bỏ</button>
+                    <form th:action="@{/admin/contact/delete}" method="post">
+                        <input type="hidden" name="id" id="deleteIdInput" />
+                        <button type="submit" class="btn btn-danger">Xác nhận Xóa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function editContact(btn) {
+            var formDiv = document.getElementById("form-edit");
+            formDiv.style.display = "block";
+            formDiv.scrollIntoView({ behavior: 'smooth' });
+
+            var id = btn.getAttribute("data-id");
+            var fullName = btn.getAttribute("data-fullname");
+            var email = btn.getAttribute("data-email");
+            var message = btn.getAttribute("data-message");
+            var status = btn.getAttribute("data-status");
+
+            document.getElementById("contactId").value = id;
+            document.getElementById("fullName").value = fullName;
+            document.getElementById("email").value = email;
+            document.getElementById("message").value = message;
+            document.getElementById("responseStatus").value = status;
+        }
+
+        function closeForm() {
+            var formDiv = document.getElementById("form-edit");
+            formDiv.style.display = "none";
+            document.getElementById("contactId").value = "";
+            document.getElementById("fullName").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("message").value = "";
+        }
+
+        var myModal = null;
+        function openDeleteModal(id) {
+            document.getElementById("deleteIdInput").value = id;
+            var modalEl = document.getElementById('deleteModal');
+            if (typeof bootstrap !== 'undefined') {
+                if (!myModal) myModal = new bootstrap.Modal(modalEl);
+                myModal.show();
+            } else {
+                modalEl.classList.add('show');
+                modalEl.style.display = 'block';
+                document.body.classList.add('modal-open');
+                var backdrop = document.createElement('div');
+                backdrop.className = 'modal-backdrop fade show';
+                backdrop.id = 'customBackdrop';
+                document.body.appendChild(backdrop);
+            }
+        }
+        function closeDeleteModal() {
+            if (myModal) myModal.hide();
+            else {
+                var modalEl = document.getElementById('deleteModal');
+                modalEl.classList.remove('show');
+                modalEl.style.display = 'none';
+                document.body.classList.remove('modal-open');
+                var backdrop = document.getElementById('customBackdrop');
+                if(backdrop) backdrop.remove();
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>

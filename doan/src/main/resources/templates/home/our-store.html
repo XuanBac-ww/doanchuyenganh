@@ -6,111 +6,108 @@
     <title>Our Store - BOOKSAW</title>
 </head>
 <body>
-    <section layout:fragment="content" class="container py-5 mt-5" id="store-content">
+<section layout:fragment="content" class="container py-5 mt-5" id="store-content">
 
-        <div class="row mb-5">
-            <div class="col text-center">
-                <h1 class="display-4 fw-bold">Our Store</h1>
-                <p class="lead text-muted">Find your next great read.</p>
+    <div class="row mb-5">
+        <div class="col text-center">
+            <h1 class="display-4 fw-bold">Our Store</h1>
+            <p class="lead text-muted">Find your next great read.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+
+<!--            <div class="card mb-4 border-0 shadow-sm rounded-3">-->
+<!--                <div class="card-header bg-white border-0 py-3"><strong>Search</strong></div>-->
+<!--                <div class="card-body">-->
+<!--                    <div class="input-group">-->
+<!--                        <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for...">-->
+<!--                        <button class="btn btn-dark" id="button-search" type="button">Go!</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="card mb-4 border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white border-0 py-3"><strong>Categories</strong></div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                            <a th:href="@{/our-store(categoryId=0)}"
+                               class="text-decoration-none"
+                               th:classappend="${param.categoryId == null or param.categoryId[0] == '0'} ? 'fw-bold text-primary' : 'text-dark'">
+                                All Categories
+                            </a>
+                        </li>
+
+                        <th:block th:each="cat : ${categories}">
+                            <li th:if="${cat.status == 1}"
+                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+
+                                <a th:href="@{/our-store(categoryId=${cat.id})}"
+                                   class="text-decoration-none"
+                                   th:classappend="${param.categoryId != null and param.categoryId[0] == #strings.toString(cat.id)} ? 'fw-bold text-primary' : 'text-dark'"
+                                   th:text="${cat.name}">
+                                    Tên danh mục
+                                </a>
+
+                                <span class="badge bg-light text-dark rounded-pill border"
+                                      th:text="${cat.products.size()}">0</span>
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
             </div>
         </div>
 
+        <div class="col-lg-8">
 
-        <div class="row">
-
-
-            <div class="col-lg-4">
-
-                <!-- Search -->
-                <div class="card mb-4 border-0 shadow-sm rounded-3">
-                    <div class="card-header bg-white"><strong>Search</strong></div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for...">
-                            <button class="btn btn-dark" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Categories -->
-                <div class="card mb-4 border-0 shadow-sm rounded-3">
-                    <div class="card-header bg-white"><strong>Categories</strong></div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                <a href="#" class="text-decoration-none text-dark">Fiction</a>
-                                <span class="badge bg-dark rounded-pill">50</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                <a href="#" class="text-decoration-none text-dark">Non-Fiction</a>
-                                <span class="badge bg-dark rounded-pill">28</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                <a href="#" class="text-decoration-none text-dark">Science Fiction</a>
-                                <span class="badge bg-dark rounded-pill">15</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                <a href="#" class="text-decoration-none text-dark">Biography</a>
-                                <span class="badge bg-dark rounded-pill">22</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                <a href="#" class="text-decoration-none text-dark">History</a>
-                                <span class="badge bg-dark rounded-pill">10</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div th:if="${products == null or products.empty}" class="alert alert-light border text-center py-5 rounded-3">
+                <i class="fa-solid fa-circle-info mb-3 fs-2 text-muted"></i>
+                <p class="mb-0 text-muted">Không tìm thấy sản phẩm nào trong danh mục này.</p>
+                <a th:href="@{/our-store(categoryId=0)}" class="btn btn-dark btn-sm mt-3">Quay lại cửa hàng</a>
             </div>
 
-            <!-- Danh sách sản phẩm -->
-            <div class="col-lg-8">
-                <div th:if="${products == null or products.empty}" class="alert alert-warning">
-                    Hiện chưa có sản phẩm nào.
-                </div>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" th:unless="${products == null or products.empty}">
 
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" th:unless="${products == null or products.empty}">
+                <div class="col" th:each="item : ${products}"
+                     th:if="${item.status == 1 and item.category != null and item.category.status == 1}">
 
-                    <div class="col" th:each="item : ${products}" th:if="${item.status == 1}">
+                    <a th:href="@{/product-detail/{id}(id=${item.id})}" class="text-decoration-none text-dark h-100 d-block">
+                        <div class="card h-100 shadow-sm border-0 rounded-3 card-hover">
 
-                        <a th:href="@{/product-detail/{id}(id=${item.id})}" class="text-decoration-none text-dark">
+                            <img th:src="${item.image != null and item.image != '' ? item.image : 'https://placehold.co/300x450/EAE0D5/6B4F4F?text=No+Image'}"
+                                 class="card-img-top"
+                                 th:alt="${item.name}"
+                                 style="object-fit: cover; height: 300px;" />
 
-                            <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <div class="card-body text-center d-flex flex-column">
+                                <h5 class="card-title fs-6 fw-bold mb-2" th:text="${item.name}">Tên sách mẫu</h5>
 
-                                <img th:src="${item.image != null and item.image != '' ? item.image : 'https://placehold.co/300x450/EAE0D5/6B4F4F?text=No+Image'}"
-                                     class="card-img-top"
-                                     th:alt="${item.name}"
-                                     style="object-fit: cover; height: 300px;" />
+                                <p class="card-text fw-bold text-danger mb-3 mt-auto"
+                                   th:text="${item.price != null ? #numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') : 0} + ' đ'">
+                                    0 đ
+                                </p>
 
-                                <div class="card-body text-center">
-
-                                    <h5 class="card-title fs-6 fw-bold" th:text="${item.name}">Tên sách mẫu</h5>
-
-                                    <p class="card-text fw-bold text-dark mb-2"
-                                       th:text="${item.price != null ? #numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') : 0} + ' đ'">
-                                        0 đ
-                                    </p>
-
-                                    <button class="btn btn-dark btn-sm">Add to Cart</button>
-                                </div>
+                                <span class="btn btn-outline-dark btn-sm w-100">
+                                    <i class="fa-solid fa-eye me-1"></i> Xem chi tiết
+                                </span>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
+            </div>
 
-            <nav aria-label="Page navigation" class="mt-5">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-
+<!--            <nav aria-label="Page navigation" class="mt-5" th:if="${not #lists.isEmpty(products)}">-->
+<!--                <ul class="pagination justify-content-center">-->
+<!--                    <li class="page-item disabled"><a class="page-link border-0 shadow-sm mx-1 rounded" href="#">Previous</a></li>-->
+<!--                    <li class="page-item active"><a class="page-link border-0 shadow-sm mx-1 rounded" href="#">1</a></li>-->
+<!--                    <li class="page-item"><a class="page-link border-0 shadow-sm mx-1 rounded" href="#">2</a></li>-->
+<!--                    <li class="page-item"><a class="page-link border-0 shadow-sm mx-1 rounded" href="#">Next</a></li>-->
+<!--                </ul>-->
+<!--            </nav>-->
         </div>
-
-
-    </section>
+    </div>
+</section>
 </body>
 </html>
-

@@ -36,15 +36,9 @@ public class AppController {
         return "home/blog";
     }
 
-    @GetMapping("/contact")
-    public String showContactPage()  {
-        return "home/contact";
-    }
 
-    @GetMapping("/thankyou")
-    public String showThankyouPage() {
-        return "home/thankyou";
-    }
+
+
 
     @GetMapping("/featured-books")
     public String showFeaturedBooksPage() {

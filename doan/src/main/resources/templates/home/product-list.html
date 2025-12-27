@@ -51,37 +51,36 @@
 
     <div class="row g-4">
         <div class="col-6 col-md-4 col-lg-3" th:each="product : ${products}">
-
-            <a th:href="@{/product-detail(id=${product.id})}" class="text-decoration-none text-dark">
+            <a th:href="@{/product-detail/{id}(id=${product.id})}" class="text-decoration-none text-dark h-100 d-block">
                 <div class="card h-100 card-product shadow-sm">
 
-                    <div class="img-wrapper position-relative">
+                    <div class="img-wrapper position-relative text-center">
                         <img th:src="${product.image}"
                              class="card-img-top"
                              alt="Ảnh sản phẩm"
-                             style="max-height: 100%; max-width: 100%; object-fit: contain; padding: 15px;">
+                             style="max-height: 200px; max-width: 100%; object-fit: contain; padding: 15px;">
                     </div>
 
                     <div class="card-body d-flex flex-column p-3">
-
                         <h5 class="card-title product-title mb-2" th:text="${product.name}">
                             Tên sách mẫu
                         </h5>
 
                         <div class="mb-3">
-                            <span class="text-danger fw-bold fs-5"
-                                  th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">
-                                100.000 đ
-                            </span>
+                        <span class="text-danger fw-bold fs-5"
+                              th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">
+                            100.000 đ
+                        </span>
                         </div>
 
-                        <a th:href="@{/product-detail/{id}(id=${product.id})}" class="btn btn-outline-primary w-100 mt-auto">
-                            <i class="fa-solid fa-eye me-1"></i> Xem chi tiết
-                        </a>
+                        <span class="btn btn-outline-primary w-100 mt-auto">
+                        <i class="fa-solid fa-eye me-1"></i> Xem chi tiết
+                    </span>
                     </div>
                 </div>
             </a>
         </div>
+    </div>
 
         <div class="col-12" th:if="${#lists.isEmpty(products)}">
             <div class="alert alert-warning text-center py-5 shadow-sm">

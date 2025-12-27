@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container-fluid px-4 mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+            <h2 class="text-dark m-0">Quản lý Footer</h2>
+
+            <button th:if="${#lists.isEmpty(footers)}"
+                    onclick="toggleForm()"
+                    class="btn btn-success">
+                <i class="fas fa-plus"></i> Thêm mới Footer
+            </button>
+        </div>
+
+        <div id="form-add" class="card mb-4 shadow-sm border-primary" style="display: none;">
+            <div class="card-header bg-primary text-white fw-bold">
+                <span id="formTitle">Thông tin Footer</span>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" th:object="${footer}" th:action="@{/admin/footer/save}">
+
+                    <input type="hidden" id="footerId" th:field="*{id}" />
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Địa chỉ <span class="text-danger">*</span></label>
+                        <input type="text" id="address" th:field="*{address}" class="form-control" placeholder="Nhập địa chỉ công ty..." required />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control" placeholder="VD: 0987654321" required />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Email <span class="text-danger">*</span></label>
+                            <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="VD: contact@example.com" required />
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Lưu lại</button>
+                        <button type="button" onclick="toggleForm()" class="btn btn-secondary">Hủy bỏ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <table class="table table-bordered table-hover table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="text-center" style="width: 50px;">ID</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th class="text-center" style="width: 150px;">Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${footers}">
+                        <td class="text-center fw-bold" th:text="${item.id}"></td>
+                        <td th:text="${item.address}"></td>
+                        <td th:text="${item.phoneNumber}"></td>
+                        <td th:text="${item.email}"></td>
+
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-primary"
+                                    th:data-id="${item.id}"
+                                    th:data-address="${item.address}"
+                                    th:data-phone="${item.phoneNumber}"
+                                    th:data-email="${item.email}"
+                                    onclick="editFooter(this)">
+                                Sửa
+                            </button>
+
+                            <button type="button" class="btn btn-sm btn-danger"
+                                    th:onclick="'openDeleteModal(' + ${item.id} + ')'">
+                                Xóa
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(footers)}">
+                        <td colspan="5" class="text-center text-muted py-4">
+                            Chưa có thông tin Footer. Vui lòng thêm mới.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteModal()"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-3 text-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                            <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                            <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+                        </svg>
+                    </div>
+                    <p class="fw-bold">Bạn có chắc chắn muốn xóa thông tin này?</p>
+                    <p class="small text-muted">Hành động này không thể hoàn tác.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeDeleteModal()">Hủy bỏ</button>
+
+                    <form th:action="@{/admin/footer/delete}" method="post">
+                        <input type="hidden" name="id" id="deleteIdInput" value="" />
+                        <button type="submit" class="btn btn-danger">Xác nhận Xóa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Logic Ẩn/Hiện Form (Card) ---
+        function toggleForm() {
+            var form = document.getElementById("form-add");
+            if (form.style.display === "none" || form.style.display === "") {
+                form.style.display = "block";
+                // Cuộn xuống form
+                form.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                form.style.display = "none";
+                // Reset form khi đóng
+                clearFormInput();
+            }
+        }
+
+        // --- Logic Đổ dữ liệu vào Form khi bấm Sửa ---
+        function editFooter(btn) {
+            // 1. Mở Form
+            var form = document.getElementById("form-add");
+            form.style.display = "block";
+            form.scrollIntoView({ behavior: 'smooth' });
+
+            // 2. Lấy data từ nút bấm
+            var id = btn.getAttribute("data-id");
+            var address = btn.getAttribute("data-address");
+            var phone = btn.getAttribute("data-phone");
+            var email = btn.getAttribute("data-email");
+
+            // 3. Điền vào input
+            document.getElementById("footerId").value = id;
+            document.getElementById("address").value = address;
+            document.getElementById("phoneNumber").value = phone;
+            document.getElementById("email").value = email;
+
+            // 4. Đổi tiêu đề Card
+            document.getElementById("formTitle").innerText = "Cập nhật Footer";
+        }
+
+        // --- Logic Reset Form ---
+        function clearFormInput() {
+            document.getElementById("footerId").value = "";
+            document.getElementById("address").value = "";
+            document.getElementById("phoneNumber").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("formTitle").innerText = "Thêm mới Footer";
+        }
+
+        // --- Logic Modal Xóa (Bootstrap 5) ---
+        var myModal = null;
+
+        function openDeleteModal(id) {
+            // Gán ID vào input ẩn trong form xóa
+            document.getElementById("deleteIdInput").value = id;
+
+            var modalElement = document.getElementById('deleteModal');
+
+            if (typeof bootstrap !== 'undefined') {
+                if (!myModal) {
+                    myModal = new bootstrap.Modal(modalElement);
+                }
+                myModal.show();
+            } else {
+                // Fallback JS thuần
+                modalElement.classList.add('show');
+                modalElement.style.display = 'block';
+                document.body.classList.add('modal-open');
+
+                var backdrop = document.createElement('div');
+                backdrop.className = 'modal-backdrop fade show';
+                backdrop.id = 'customBackdrop';
+                document.body.appendChild(backdrop);
+            }
+        }
+
+        function closeDeleteModal() {
+            if (myModal) {
+                myModal.hide();
+            } else {
+                var modalElement = document.getElementById('deleteModal');
+                modalElement.classList.remove('show');
+                modalElement.style.display = 'none';
+                document.body.classList.remove('modal-open');
+                var backdrop = document.getElementById('customBackdrop');
+                if(backdrop) backdrop.remove();
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>

@@ -46,74 +46,59 @@
                 <div class="col-md-6">
                     <div class="social-links">
                         <ul>
-                            <li><a href="#"><i class="icon icon-facebook"></i></a></li>
-                            <li><a href="#"><i class="icon icon-twitter"></i></a></li>
-                            <li><a href="#"><i class="icon icon-youtube-play"></i></a></li>
-                            <li><a href="#"><i class="icon icon-behance-square"></i></a></li>
+                            <li><a href="https://web.facebook.com/xuan.bac.117828"><i class="icon icon-facebook"></i></a></li>
+                            <li><a href="https://www.youtube.com/@xuanbac884"><i class="icon icon-youtube-play"></i></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="right-element d-flex justify-content-end align-items-center">
-                        <a href="#" class="user-account for-buy me-3 text-decoration-none" style="color: #333;">
-                            <i class="icon icon-user"></i><span>Account</span>
+                        <a th:href="@{/admin}"
+                           class="user-account for-buy me-3 text-decoration-none d-flex align-items-center"
+                           style="color: #333; width: auto ; margin: 0 1rem 0 0 ;">
+                            <i class="icon icon-user me-1" style="line-height: 1;"></i>
+                            <span style="line-height: 1;">Account</span>
                         </a>
 
-                        <div class="dropdown">
-                            <a href="#" class="cart for-buy dropdown-toggle d-flex align-items-center text-decoration-none"
-                               id="cartDropdown"
-                               data-bs-toggle="dropdown"
-                               aria-expanded="false"
-                               style="color: #333;">
-                                <i class="icon icon-clipboard me-1"></i>
-                                <span>Cart:(199,000 đ)</span>
-                            </a>
+<!--                        <div class="dropdown">-->
+<!--                            <a href="#" class="cart for-buy dropdown-toggle d-flex align-items-center text-decoration-none"-->
+<!--                               id="cartDropdown"-->
+<!--                               data-bs-toggle="dropdown"-->
+<!--                               aria-expanded="false"-->
+<!--                               style="color: #333;">-->
+<!--                                <i class="icon icon-clipboard me-1"></i>-->
+<!--                                <span>Cart:(199,000 đ)</span>-->
+<!--                            </a>-->
 
-                            <ul class="dropdown-menu dropdown-menu-end shadow cart-dropdown-menu p-0" aria-labelledby="cartDropdown">
-                                <li class="p-2 border-bottom bg-light text-center">
-                                    <small class="text-uppercase fw-bold text-muted" style="font-size: 11px;">Sản phẩm mới thêm</small>
-                                </li>
-
-                                <li>
-                                    <div class="dropdown-item border-bottom">
-                                        <img src="https://picsum.photos/seed/book1/100/150"
-                                             alt="Nhà Giả Kim" class="cart-item-img me-3">
-                                        <div class="flex-grow-1">
-                                            <div class="fw-bold text-dark mb-0" style="font-size: 14px;">Nhà Giả Kim</div>
-                                            <div class="text-danger small fw-bold">79,000 đ</div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="dropdown-item">
-                                        <img src="https://picsum.photos/seed/book2/100/150"
-                                             alt="Rừng Na Uy" class="cart-item-img me-3">
-                                        <div class="flex-grow-1">
-                                            <div class="fw-bold text-dark mb-0" style="font-size: 14px;">Rừng Na Uy</div>
-                                            <div class="text-danger small fw-bold">120,000 đ</div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="p-3">
-                                    <a href="/cart" class="btn btn-view-cart w-100 rounded-0 text-uppercase py-2 shadow-sm">
-                                        XEM CHI TIẾT GIỎ HÀNG
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="action-menu ms-3">
-                            <div class="search-bar text-end">
-                                <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
-                                    <i class="icon icon-search"></i>
-                                </a>
-                                <form role="search" method="get" class="search-box">
-                                    <input class="search-field text search-input" placeholder="Search" type="search">
-                                </form>
-                            </div>
-                        </div>
+<!--                            <ul class="dropdown-menu dropdown-menu-end shadow cart-dropdown-menu p-0" aria-labelledby="cartDropdown">-->
+<!--                                <li class="p-2 border-bottom bg-light text-center">-->
+<!--                                    <small class="text-uppercase fw-bold text-muted" style="font-size: 11px;">Sản phẩm mới thêm</small>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <div class="dropdown-item border-bottom">-->
+<!--                                        <img src="https://picsum.photos/seed/book1/100/150" alt="Nhà Giả Kim" class="cart-item-img me-3">-->
+<!--                                        <div class="flex-grow-1">-->
+<!--                                            <div class="fw-bold text-dark mb-0" style="font-size: 14px;">Nhà Giả Kim</div>-->
+<!--                                            <div class="text-danger small fw-bold">79,000 đ</div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <div class="dropdown-item">-->
+<!--                                        <img src="https://picsum.photos/seed/book2/100/150" alt="Rừng Na Uy" class="cart-item-img me-3">-->
+<!--                                        <div class="flex-grow-1">-->
+<!--                                            <div class="fw-bold text-dark mb-0" style="font-size: 14px;">Rừng Na Uy</div>-->
+<!--                                            <div class="text-danger small fw-bold">120,000 đ</div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                <li class="p-3">-->
+<!--                                    <a href="/cart" class="btn btn-view-cart w-100 rounded-0 text-uppercase py-2 shadow-sm">-->
+<!--                                        XEM CHI TIẾT GIỎ HÀNG-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

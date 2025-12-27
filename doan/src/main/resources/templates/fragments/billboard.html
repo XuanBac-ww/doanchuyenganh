@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <section layout:fragment="billboard" id="billboard">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
 
-                    <button class="prev slick-arrow">
-                        <i class="icon icon-arrow-left"></i>
-                    </button>
 
-                    <div class="main-slider pattern-overlay">
+<section layout:fragment="billboard" id="billboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-                        <div class="slider-item">
-                            <div class="banner-content">
-                                <h2 class="banner-title">Life of the Wild</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
-                                    ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis
-                                    urna, a eu.</p>
-                                <div class="btn-wrap">
-                                    <a href="#" class="btn btn-outline-accent btn-accent-arrow">
-                                        Read More<i class="icon icon-ns-arrow-right"></i>
+                <button class="prev slick-arrow">
+                    <i class="icon icon-arrow-left"></i>
+                </button>
+
+                <div class="main-slider pattern-overlay">
+
+                    <div class="slider-item d-flex align-items-center py-5"
+                         th:each="product, stat : ${products}"
+                         th:if="${stat.count <= 3}">
+
+                        <div class="row w-100 mx-0">
+
+                            <div class="col-md-6 d-flex flex-column justify-content-center px-md-5 mb-4 mb-md-0">
+                                <h2 class="banner-title display-4 fw-bold mb-3"
+                                    th:text="${product.name}">Tên Sách</h2>
+
+                                <p class="lead text-muted mb-4"
+                                   th:text="${product.description}">
+                                    Mô tả...
+                                </p>
+
+                                <div>
+                                    <a th:href="@{/product-detail/{id}(id=${product.id})}"
+                                       class="btn btn-outline-accent btn-lg rounded-pill px-4">
+                                        Read More <i class="icon icon-ns-arrow-right ms-2"></i>
                                     </a>
                                 </div>
                             </div>
-                            <img th:src="@{/images/main-banner1.jpg}" alt="banner" class="banner-image">
-                        </div>
 
-                        <div class="slider-item">
-                            <div class="banner-content">
-                                <h2 class="banner-title">Birds gonna be Happy</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
-                                    ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis
-                                    urna, a eu.</p>
-                                <div class="btn-wrap">
-                                    <a href="#" class="btn btn-outline-accent btn-accent-arrow">
-                                        Read More<i class="icon icon-ns-arrow-right"></i>
-                                    </a>
-                                </div>
+                            <div class="col-md-6 text-center d-flex align-items-center justify-content-center">
+                                <img th:src="${product.image}"
+                                     alt="Book Cover"
+                                     class="img-fluid shadow-sm rounded"
+                                     style="max-height: 450px; object-fit: contain;">
                             </div>
-                            <img th:src="@{/images/main-banner2.jpg}" alt="banner" class="banner-image">
-                        </div>
 
+                        </div>
                     </div>
 
-                    <button class="next slick-arrow">
-                        <i class="icon icon-arrow-right"></i>
-                    </button>
-
                 </div>
+
+                <button class="next slick-arrow">
+                    <i class="icon icon-arrow-right"></i>
+                </button>
+
             </div>
         </div>
-
-    </section>
+    </div>
+</section>
 </html>

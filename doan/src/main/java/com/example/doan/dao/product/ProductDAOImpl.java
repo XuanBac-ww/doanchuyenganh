@@ -53,10 +53,8 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public List<Product> findByCategoryId(int categoryId) {
         String jpql = "FROM Product p WHERE p.category.id = :theCategoryId";
-
         TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
         query.setParameter("theCategoryId", categoryId);
-
         return query.getResultList();
     }
 }

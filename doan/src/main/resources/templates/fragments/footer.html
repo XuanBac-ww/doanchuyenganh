@@ -7,103 +7,89 @@
             <div class="row">
 
                 <div class="col-md-4">
-
                     <div class="footer-item">
                         <div class="company-brand">
-                            <img src="images/main-logo.png" alt="logo" class="footer-logo">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus
-                                nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames
-                                semper erat ac in suspendisse iaculis.</p>
+                            <div th:if="${commonFooter != null}" class="mt-4">
+                                <p class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-map-marker-alt me-2 mt-1 text-primary" style="min-width: 20px;"></i>
+                                    <span th:text="${commonFooter.address}">Địa chỉ mặc định</span>
+                                </p>
+                                <p class="mb-3 d-flex align-items-center">
+                                    <i class="fas fa-phone-alt me-2 text-primary" style="min-width: 20px;"></i>
+                                    <span th:text="${commonFooter.phoneNumber}">0123 456 789</span>
+                                </p>
+                                <p class="mb-3 d-flex align-items-center">
+                                    <i class="fas fa-envelope me-2 text-primary" style="min-width: 20px;"></i>
+                                    <span th:text="${commonFooter.email}">email@example.com</span>
+                                </p>
+                            </div>
+                            <div th:unless="${commonFooter != null}">
+                                <p>Đang cập nhật thông tin liên hệ...</p>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
 
+<!--                <div class="col-md-2">-->
+
+<!--                    <div class="footer-menu">-->
+<!--                        <h5>About Us</h5>-->
+<!--                        <ul class="menu-list">-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="#">vision</a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="#">articles </a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="#">careers</a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="#">service terms</a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="#">donate</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+
+<!--                </div>-->
                 <div class="col-md-2">
-
-                    <div class="footer-menu">
-                        <h5>About Us</h5>
-                        <ul class="menu-list">
-                            <li class="menu-item">
-                                <a href="#">vision</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">articles </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">careers</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">service terms</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">donate</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-md-2">
-
                     <div class="footer-menu">
                         <h5>Discover</h5>
                         <ul class="menu-list">
                             <li class="menu-item">
-                                <a href="#">Home</a>
+                                <a th:href="@{/}">Home</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#">Books</a>
+                                <a th:href="@{/our-store}">Books</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#">Authors</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Subjects</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Advanced Search</a>
+                                <a th:href="@{/category}">Category</a>
                             </li>
                         </ul>
                     </div>
-
                 </div>
-                <div class="col-md-2">
 
+                <div class="col-md-2">
                     <div class="footer-menu">
                         <h5>My account</h5>
                         <ul class="menu-list">
                             <li class="menu-item">
-                                <a href="#">Sign In</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">View Cart</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">My Wishtlist</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Track My Order</a>
+                                <a th:href="@{/login}">Sign In</a>
                             </li>
                         </ul>
                     </div>
-
                 </div>
+
                 <div class="col-md-2">
 
                     <div class="footer-menu">
                         <h5>Help</h5>
                         <ul class="menu-list">
                             <li class="menu-item">
-                                <a href="#">Help center</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Report a problem</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Suggesting edits</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Contact us</a>
+                                <a th:href="@{/contact}">Contact us</a>
                             </li>
                         </ul>
                     </div>

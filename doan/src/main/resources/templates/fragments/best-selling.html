@@ -8,28 +8,46 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="row">
+
+                <div class="row" th:each="product, stat : ${products}" th:if="${stat.count == 1}">
+
                     <div class="col-md-6">
                         <figure class="products-thumb">
-                            <img src="images/single-image.jpg" alt="book" class="single-image">
+                            <img th:src="${product.image}"
+                                 alt="book"
+                                 class="single-image img-fluid"
+                                 style="width: 100%; height: auto; object-fit: contain;">
                         </figure>
                     </div>
+
                     <div class="col-md-6">
                         <div class="product-entry">
                             <h2 class="section-title divider">Best Selling Book</h2>
+
                             <div class="products-content">
                                 <div class="author-name">By Timbur Hood</div>
-                                <h3 class="item-title">Birds gonna be happy</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                                <div class="item-price">$ 45.00</div>
-                                <div class="btn-wrap">
-                                    <a href="#" class="btn-accent-arrow">shop it now <i class="icon icon-ns-arrow-right"></i></a>
+
+                                <h3 class="item-title" th:text="${product.name}">Tên sách</h3>
+
+                                <p th:text="${product.description}">Mô tả sản phẩm...</p>
+
+                                <div class="item-price"
+                                     th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">
+                                    45.000 đ
                                 </div>
+
+                                <div class="btn-wrap">
+                                    <a th:href="@{/product-detail/{id}(id=${product.id})}"
+                                       class="btn-accent-arrow">
+                                        shop it now <i class="icon icon-ns-arrow-right"></i>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                </div> </div>
         </div>
     </div>
 
